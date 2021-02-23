@@ -10,17 +10,9 @@ sourceSets {
     main {
         java {
             srcDirs 'src/main/java'
-            //srcDirs 'base-java-graphics/src/main/java'
+            srcDirs 'base-java-graphics/src/main/java'
         }
     }
-}
-
-//dependencies {
-//    testCompile group: 'junit', name: 'junit', version: '4.12'
-//}
-
-repositories {
-    mavenCentral()
 }
 
 mainClassName = 'gameoflife.Main'
