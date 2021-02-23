@@ -1,0 +1,34 @@
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: 'eclipse'
+//apply plugin: 'idea'
+
+version = theVersion
+
+//https://stackoverflow.com/questions/31077844/add-another-java-source-directory-to-gradle-script
+sourceSets {
+    main {
+        java {
+            srcDirs 'src/main/java'
+            //srcDirs 'base-java-graphics/src/main/java'
+        }
+    }
+}
+
+//dependencies {
+//    testCompile group: 'junit', name: 'junit', version: '4.12'
+//}
+
+repositories {
+    mavenCentral()
+}
+
+mainClassName = 'gameoflife.Main'
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': mainClassName
+        )
+    }
+}
