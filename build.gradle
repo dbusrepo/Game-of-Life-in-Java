@@ -15,7 +15,7 @@ sourceSets {
     }
 }
 
-mainClassName = 'gameoflife.Main'
+mainClassName = 'GameOfLife'
 
 jar {
     manifest {
