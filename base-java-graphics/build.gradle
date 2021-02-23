@@ -1,0 +1,35 @@
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: 'eclipse'
+// apply plugin: 'idea'
+
+version = theVersion
+// sourceCompatibility = theSourceCompatibility
+// targetCompatibility = theTargetCompatibility
+
+//https://stackoverflow.com/questions/31077844/add-another-java-source-directory-to-gradle-script
+sourceSets {
+    main {
+        java {
+            srcDirs 'src/main/java'
+        }
+    }
+}
+
+dependencies {
+    //implementation 'info.picocli:picocli:4.2.0'
+}
+
+repositories {
+    mavenCentral()
+}
+
+mainClassName = 'base.graphics.app.Main'
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': mainClassName
+        )
+    }
+}
