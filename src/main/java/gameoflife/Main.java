@@ -1,14 +1,16 @@
+package gameoflife;
+
 import base.graphics.app.GraphAppSoftRendering;
 import base.graphics.app.Settings;
 
-public class GameOfLife extends GraphAppSoftRendering {
+public class Main extends GraphAppSoftRendering {
 	Settings settings;
 
 	public static void main(String[] args) throws Exception {
-		new GameOfLife();
+		new Main();
 	}
 
-	public GameOfLife() throws Exception {
+	public Main() throws Exception {
 		settings = new Settings();
 		settings.winWidth = 300;
 		settings.winHeight = 300;

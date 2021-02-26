@@ -13,9 +13,27 @@ sourceSets {
             srcDirs 'base-java-graphics/src/main/java'
         }
     }
+    test {
+    	java {
+    		srcDirs 'src/test/java' 
+    	}
+    }
 }
 
-mainClassName = 'GameOfLife'
+test {
+    useJUnitPlatform()
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+}
+
+mainClassName = 'gameoflife.Main'
 
 jar {
     manifest {
