@@ -7,16 +7,15 @@ import java.util.Random;
 import org.junit.jupiter.api.Test;
 
 import gameoflife.ILifeEngine;
-import gameoflife.LifeEngine;
 import gameoflife.engine.basic.BasicLifeEngine;
 
 class TestLifeEngine {
 
 	@Test
 	void test() {
-		int seed = 374;
-		int w = 15;
-		int h = 20;
+		int seed = 3745;
+		int w = 150;
+		int h = 200;
 		int numGen = 100;
 		int initLength = (w * h) / 2;
 		Random r = new Random(seed);
@@ -50,7 +49,7 @@ class TestLifeEngine {
 	}
 
 	private ILifeEngine makeEngine(int w, int h) {
-		return new LifeEngine(w, h);
+		return new BasicLifeEngine(w, h);
 	}
 
 }
