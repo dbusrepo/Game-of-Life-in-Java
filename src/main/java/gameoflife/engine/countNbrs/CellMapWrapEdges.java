@@ -1,4 +1,4 @@
-package gameoflife.engine.basic;
+package gameoflife.engine.countNbrs;
 
 class CellMapWrapEdges extends CellMap {
 

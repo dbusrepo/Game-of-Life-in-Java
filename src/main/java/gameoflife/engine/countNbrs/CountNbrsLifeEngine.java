@@ -1,15 +1,15 @@
-package gameoflife.engine.basic;
+package gameoflife.engine.countNbrs;
 
 import gameoflife.ILifeEngine;
 
-public class BasicLifeEngine implements ILifeEngine {
+public class CountNbrsLifeEngine implements ILifeEngine {
 
 	static final int DEAD = 0;
 	static final int ALIVE = 1;
 
 	CellMap cells, nextCells;
 
-	public BasicLifeEngine(int w, int h) {
+	public CountNbrsLifeEngine(int w, int h) {
 		if (w < 1 || h < 1) {
 			throw new IllegalArgumentException("sizes not correct");
 		}

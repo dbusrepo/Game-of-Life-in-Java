@@ -7,7 +7,8 @@ import java.util.Random;
 import org.junit.jupiter.api.Test;
 
 import gameoflife.ILifeEngine;
-import gameoflife.engine.basic.BasicLifeEngine;
+import gameoflife.engine.countNbrs.CountNbrsLifeEngine;
+import gameoflife.engine.storeNbrs.StoreNbrsLifeEngine;
 
 class TestLifeEngine {
 
@@ -19,7 +20,7 @@ class TestLifeEngine {
 		int numGen = 100;
 		int initLength = (w * h) / 2;
 		Random r = new Random(seed);
-		ILifeEngine basic = makeBasicEngine(w, h);
+		ILifeEngine basic = makeBaseEngine(w, h);
 		ILifeEngine engine = makeEngine(w, h);
 		// init cell maps
 		while (initLength > 0) {
@@ -44,12 +45,12 @@ class TestLifeEngine {
 		}
 	}
 
-	private ILifeEngine makeBasicEngine(int w, int h) {
-		return new BasicLifeEngine(w, h);
+	private ILifeEngine makeBaseEngine(int w, int h) {
+		return new CountNbrsLifeEngine(w, h);
 	}
 
 	private ILifeEngine makeEngine(int w, int h) {
-		return new BasicLifeEngine(w, h);
+		return new StoreNbrsLifeEngine(w, h);
 	}
 
 }

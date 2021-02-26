@@ -1,4 +1,4 @@
-package gameoflife.engine.basic;
+package gameoflife.engine.countNbrs;
 
 class CellMap {
 
@@ -14,7 +14,7 @@ class CellMap {
 		for (int y = 0; y != h; ++y) {
 			cells[y] = new int[w];
 			for (int x = 0; x != w; ++x) {
-				setCellState(x, y, BasicLifeEngine.DEAD);
+				setCellState(x, y, CountNbrsLifeEngine.DEAD);
 			}
 		}
 	}

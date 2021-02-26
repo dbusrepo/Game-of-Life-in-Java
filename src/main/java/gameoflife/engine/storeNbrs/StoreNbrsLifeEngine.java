@@ -1,8 +1,13 @@
-package gameoflife;
+package gameoflife.engine.storeNbrs;
 
-public class LifeEngine implements ILifeEngine {
+import gameoflife.ILifeEngine;
 
-	public LifeEngine(int w, int h) {
+public class StoreNbrsLifeEngine implements ILifeEngine {
+
+	CellMap cells, nextCells;
+
+	public StoreNbrsLifeEngine(int w, int h) {
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
