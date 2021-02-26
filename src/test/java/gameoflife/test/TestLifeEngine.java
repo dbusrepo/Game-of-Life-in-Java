@@ -6,9 +6,9 @@ import java.util.Random;
 
 import org.junit.jupiter.api.Test;
 
-import gameoflife.BasicLifeEngine;
 import gameoflife.ILifeEngine;
 import gameoflife.LifeEngine;
+import gameoflife.engine.basic.BasicLifeEngine;
 
 class TestLifeEngine {
 
