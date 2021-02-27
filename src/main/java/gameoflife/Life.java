@@ -54,6 +54,6 @@ public class Life extends GraphAppSoftRendering {
 
 	@Override
 	public void printFinalStats() {
-		System.out.println("#Generations:" + lifeEngine.getGeneration());
+//		System.out.println("#Generations:" + lifeEngine.getGeneration());
 	}
 }
