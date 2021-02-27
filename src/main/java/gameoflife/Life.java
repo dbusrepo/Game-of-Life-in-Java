@@ -38,22 +38,22 @@ public class Life extends GraphAppSoftRendering {
 	}
 
 	@Override
-	public void drawFrameApp(Graphics2D g) {
+	public void drawFrame(Graphics2D g) {
 //		super.drawFrameApp(g);
 		lifeEngine.nextGeneration();
 	}
 
 	@Override
-	public void updateApp(long elapsedTime) {
+	public void update(long elapsedTime) {
 	}
 
 	@Override
-	public void finishOffApp() {
+	public void finishOff() {
 		// TODO Auto-generated method stub
 	}
 
 	@Override
-	public void printFinalStatsApp() {
+	public void printFinalStats() {
 		System.out.println("#Generations:" + lifeEngine.getGeneration());
 	}
 }
