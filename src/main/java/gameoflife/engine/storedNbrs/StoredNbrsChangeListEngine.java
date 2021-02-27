@@ -51,7 +51,6 @@ public class StoredNbrsChangeListEngine implements ILifeEngine {
 		updateLists(); // visits the change lists again and build the next
 						// change lists
 		++numGeneration;
-
 	}
 
 	private void initLists() {

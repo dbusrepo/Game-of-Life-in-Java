@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Random;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import gameoflife.ILifeEngine;
@@ -12,6 +13,7 @@ import gameoflife.engine.storedNbrs.StoredNbrsChangeListEngine;
 
 class TestLifeEngine {
 
+	@Disabled
 	@Test
 	void test() {
 		int seed = 37435;
@@ -26,7 +28,7 @@ class TestLifeEngine {
 		while (initLength > 0) {
 			int x = r.nextInt(w);
 			int y = r.nextInt(h);
-			if (baseEng.isCellAlive(x, y) == false) {
+			if (curEng.isCellAlive(x, y) == false) {
 				baseEng.setCell(x, y);
 				curEng.setCell(x, y);
 			}
@@ -47,11 +49,13 @@ class TestLifeEngine {
 
 	private ILifeEngine makeBaseEngine(int w, int h) {
 		return new CountNbrsEngine(w, h);
+//		return new StoredNbrsEngine(w, h);
 	}
 
 	private ILifeEngine makeEngine(int w, int h) {
 //		return new StoredNbrsEngine(w, h);
 		return new StoredNbrsChangeListEngine(w, h);
+//		return new CountNbrsEngine(w, h);
 	}
 
 }
