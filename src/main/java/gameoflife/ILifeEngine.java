@@ -10,4 +10,6 @@ public interface ILifeEngine {
 
 	void nextGeneration();
 
+	int getGeneration(); // gen number
+
 }

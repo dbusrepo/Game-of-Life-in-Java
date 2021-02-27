@@ -5,6 +5,7 @@ import gameoflife.ILifeEngine;
 public class StoredNbrsEngine implements ILifeEngine {
 
 	StateNbrsMap cells, nextCells;
+	private int generation;
 
 	public StoredNbrsEngine(int w, int h) {
 		if (w < 1 || h < 1) {
@@ -60,12 +61,18 @@ public class StoredNbrsEngine implements ILifeEngine {
 			}
 		}
 		swapCellMaps();
+		++generation;
 	}
 
 	private void swapCellMaps() {
 		StateNbrsMap tmp = cells;
 		cells = nextCells;
 		nextCells = tmp;
+	}
+
+	@Override
+	public int getGeneration() {
+		return generation;
 	}
 
 }

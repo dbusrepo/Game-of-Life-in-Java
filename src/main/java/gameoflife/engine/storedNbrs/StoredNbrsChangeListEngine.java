@@ -9,7 +9,7 @@ public class StoredNbrsChangeListEngine implements ILifeEngine {
 	StateNbrsNextGenMap cells;
 	LongDynArray live, die;
 	LongDynArray nextLive, nextDie;
-	int numGeneration;
+	int generation;
 
 	public StoredNbrsChangeListEngine(int w, int h) {
 		if (w < 1 || h < 1) {
@@ -39,7 +39,7 @@ public class StoredNbrsChangeListEngine implements ILifeEngine {
 
 	@Override
 	public void nextGeneration() {
-		if (numGeneration == 0) {
+		if (generation == 0) {
 			initLists();
 		}
 		// inv: here live and die (change) lists contain the cells to update for
@@ -50,7 +50,7 @@ public class StoredNbrsChangeListEngine implements ILifeEngine {
 		updateCells(); // visit the change lists and update the cells
 		updateLists(); // visits the change lists again and build the next
 						// change lists
-		++numGeneration;
+		++generation;
 	}
 
 	private void initLists() {
@@ -190,6 +190,11 @@ public class StoredNbrsChangeListEngine implements ILifeEngine {
 	private long makePos(int x, int y) {
 		long value = ((long) x << SHIFT) | y;
 		return value;
+	}
+
+	@Override
+	public int getGeneration() {
+		return generation;
 	}
 
 }

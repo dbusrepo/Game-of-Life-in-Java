@@ -1,29 +1,49 @@
 package gameoflife;
 
+import java.awt.Graphics2D;
+
 import base.graphics.app.GraphAppSoftRendering;
-import base.graphics.app.Settings;
+import gameoflife.engine.countNbrs.CountNbrsEngine;
 
 public class Life extends GraphAppSoftRendering {
 
-	Settings settings;
+	LifeSettings settings;
+	ILifeEngine lifeEngine;
 
 	public static void main(String[] args) throws Exception {
 		new Life();
 	}
 
 	public Life() throws Exception {
-		settings = new Settings();
-		settings.winWidth = 300;
-		settings.winHeight = 300;
-		settings.title = "Game of Life";
-		settings.showTitleBar = false;
-		settings.showMenu = true;
+		initSettings();
+		lifeEngine = makeLifeEngine();
 		start(settings);
+	}
+
+	private ILifeEngine makeLifeEngine() {
+		return new CountNbrsEngine(settings.cols, settings.rows);
+	}
+
+	private void initSettings() {
+		LifeSettings stgs = new LifeSettings();
+		stgs.title = "Game of Life";
+		stgs.showTitleBar = false;
+		stgs.showMenu = true;
+		stgs.showGraphCapabilities = false;
+		stgs.winWidth = stgs.cols * stgs.magnifer;
+		stgs.winHeight = stgs.rows * stgs.magnifer;
+//		stgs.showFps = false;
+		settings = stgs;
+	}
+
+	@Override
+	public void drawFrameApp(Graphics2D g) {
+//		super.drawFrameApp(g);
+		lifeEngine.nextGeneration();
 	}
 
 	@Override
 	public void updateApp(long elapsedTime) {
-		// TODO Auto-generated method stub
 	}
 
 	@Override
@@ -33,6 +53,6 @@ public class Life extends GraphAppSoftRendering {
 
 	@Override
 	public void printFinalStatsApp() {
-		// TODO Auto-generated method stub
+		System.out.println("#Generations:" + lifeEngine.getGeneration());
 	}
 }

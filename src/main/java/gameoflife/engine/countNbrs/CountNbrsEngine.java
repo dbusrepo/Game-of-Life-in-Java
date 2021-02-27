@@ -8,6 +8,7 @@ public class CountNbrsEngine implements ILifeEngine {
 	static final int ALIVE = 1;
 
 	StateMap cells, nextCells;
+	private int generation;
 
 	public CountNbrsEngine(int w, int h) {
 		if (w < 1 || h < 1) {
@@ -54,6 +55,7 @@ public class CountNbrsEngine implements ILifeEngine {
 			}
 		}
 		swapCellMaps();
+		++generation;
 	}
 
 	private void swapCellMaps() {
@@ -67,6 +69,11 @@ public class CountNbrsEngine implements ILifeEngine {
 				+ cells.cellState(x + 1, y - 1) + cells.cellState(x - 1, y)
 				+ cells.cellState(x + 1, y) + cells.cellState(x - 1, y + 1)
 				+ cells.cellState(x, y + 1) + cells.cellState(x + 1, y + 1);
+	}
+
+	@Override
+	public int getGeneration() {
+		return generation;
 	}
 
 }
