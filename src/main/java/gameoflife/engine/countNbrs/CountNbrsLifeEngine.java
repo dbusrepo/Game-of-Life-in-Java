@@ -18,7 +18,7 @@ public class CountNbrsLifeEngine implements ILifeEngine {
 	}
 
 	private CellMap makeCellMap(int w, int h) {
-		return new CellMapWrapEdges(w, h);
+		return new CellMap(w, h);
 	}
 
 	@Override

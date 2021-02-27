@@ -3,9 +3,8 @@ package gameoflife.engine.countNbrs;
 class CellMap {
 
 	int width, height;
-	int[][] cells;
+	int[][] cells; // stores the state, alive or dead
 
-	// w, h >= 1
 	CellMap(int w, int h) {
 		assert w >= 1 && h >= 1;
 		width = w;
@@ -27,11 +26,18 @@ class CellMap {
 		return width;
 	}
 
-	// no wrapping here
 	int cellState(int x, int y) {
-		if (x < 0 || x >= width || y < 0 || y >= height) {
-			return 0; // return 0 for off edges
-		}
+//		if (x < 0 || x >= width || y < 0 || y >= height) {
+//			return 0; // return 0 for off edges if no wrapping
+//		}
+		while (x < 0)
+			x += width;
+		while (x >= width)
+			x -= width;
+		while (y < 0)
+			y += height;
+		while (y >= height)
+			y -= height;
 		return cells[y][x];
 	}
 
@@ -41,10 +47,8 @@ class CellMap {
 
 	// here we assume same size
 	void copyCells(CellMap sourceMap) {
-		assert sourceMap instanceof CellMap;
-		CellMap source = sourceMap;
 		for (int y = 0; y != height; ++y) {
-			System.arraycopy(source.cells[y], 0, cells[y], 0, width);
+			System.arraycopy(sourceMap.cells[y], 0, cells[y], 0, width);
 		}
 	}
 
