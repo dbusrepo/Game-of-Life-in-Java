@@ -8,27 +8,27 @@ import org.junit.jupiter.api.Test;
 
 import gameoflife.ILifeEngine;
 import gameoflife.engine.countNbrs.CountNbrsEngine;
-import gameoflife.engine.storeNbrs.StoreNbrsChangeListEngine;
+import gameoflife.engine.storedNbrs.StoredNbrsChangeListEngine;
 
 class TestLifeEngine {
 
 	@Test
 	void test() {
-		int seed = 3745;
+		int seed = 37435;
 		int w = 150;
 		int h = 200;
 		int numGen = 100;
 		int initLength = (w * h) / 2;
 		Random r = new Random(seed);
-		ILifeEngine basic = makeBaseEngine(w, h);
-		ILifeEngine engine = makeEngine(w, h);
+		ILifeEngine baseEng = makeBaseEngine(w, h);
+		ILifeEngine curEng = makeEngine(w, h);
 		// init cell maps
 		while (initLength > 0) {
 			int x = r.nextInt(w);
 			int y = r.nextInt(h);
-			if (basic.isCellAlive(x, y) == false) {
-				basic.setCell(x, y);
-				engine.setCell(x, y);
+			if (baseEng.isCellAlive(x, y) == false) {
+				baseEng.setCell(x, y);
+				curEng.setCell(x, y);
 			}
 			initLength--;
 		}
@@ -36,12 +36,12 @@ class TestLifeEngine {
 		for (int g = 0; g <= numGen; ++g) {
 			for (int y = 0; y != h; ++y) {
 				for (int x = 0; x != w; ++x) {
-					assertTrue(basic.isCellAlive(x, y) == engine.isCellAlive(x,
-							y));
+					assertTrue(baseEng.isCellAlive(x, y) == curEng
+							.isCellAlive(x, y));
 				}
 			}
-			basic.nextGeneration();
-			engine.nextGeneration();
+			baseEng.nextGeneration();
+			curEng.nextGeneration();
 		}
 	}
 
@@ -50,8 +50,8 @@ class TestLifeEngine {
 	}
 
 	private ILifeEngine makeEngine(int w, int h) {
-//		return new StoreNbrsEngine(w, h);
-		return new StoreNbrsChangeListEngine(w, h);
+//		return new StoredNbrsEngine(w, h);
+		return new StoredNbrsChangeListEngine(w, h);
 	}
 
 }

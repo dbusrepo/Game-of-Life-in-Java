@@ -1,11 +1,11 @@
 package gameoflife.engine.countNbrs;
 
-class CellMap {
+class StateMap {
 
 	int width, height;
 	int[][] cells; // stores the state, alive or dead
 
-	CellMap(int w, int h) {
+	StateMap(int w, int h) {
 		assert w >= 1 && h >= 1;
 		width = w;
 		height = h;
@@ -46,7 +46,7 @@ class CellMap {
 	}
 
 	// here we assume same size
-	void copyCells(CellMap sourceMap) {
+	void copyCells(StateMap sourceMap) {
 		for (int y = 0; y != height; ++y) {
 			System.arraycopy(sourceMap.cells[y], 0, cells[y], 0, width);
 		}

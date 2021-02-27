@@ -7,7 +7,7 @@ public class CountNbrsEngine implements ILifeEngine {
 	static final int DEAD = 0;
 	static final int ALIVE = 1;
 
-	CellMap cells, nextCells;
+	StateMap cells, nextCells;
 
 	public CountNbrsEngine(int w, int h) {
 		if (w < 1 || h < 1) {
@@ -17,8 +17,8 @@ public class CountNbrsEngine implements ILifeEngine {
 		nextCells = makeCellMap(w, h);
 	}
 
-	private CellMap makeCellMap(int w, int h) {
-		return new CellMap(w, h);
+	private StateMap makeCellMap(int w, int h) {
+		return new StateMap(w, h);
 	}
 
 	@Override
@@ -57,7 +57,7 @@ public class CountNbrsEngine implements ILifeEngine {
 	}
 
 	private void swapCellMaps() {
-		CellMap tmp = cells;
+		StateMap tmp = cells;
 		cells = nextCells;
 		nextCells = tmp;
 	}

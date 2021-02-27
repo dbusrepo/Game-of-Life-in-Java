@@ -1,6 +1,6 @@
-package gameoflife.engine.storeNbrs;
+package gameoflife.engine.storedNbrs;
 
-class CellMap {
+class StateNbrsMap {
 
 	private static final int STATE_MASK = 0x1;
 	private static final int NBRS_INC = 2; // to sum/sub 1 to the 2^ bit
@@ -10,7 +10,7 @@ class CellMap {
 	int[][] cells; // stores the state (first bit) followed by the number of
 					// alive neighbors.
 
-	CellMap(int w, int h) {
+	StateNbrsMap(int w, int h) {
 		assert w >= 1 && h >= 1;
 		width = w;
 		height = h;
@@ -70,7 +70,7 @@ class CellMap {
 		rowBelow[xright] += inc;
 	}
 
-	public void copyCells(CellMap sourceMap) {
+	public void copyCells(StateNbrsMap sourceMap) {
 		for (int y = 0; y != height; ++y) {
 			System.arraycopy(sourceMap.cells[y], 0, cells[y], 0, width);
 		}

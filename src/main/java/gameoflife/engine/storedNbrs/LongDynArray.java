@@ -1,13 +1,13 @@
-package gameoflife.engine.storeNbrs;
+package gameoflife.engine.storedNbrs;
 
-public class PosList {
+public class LongDynArray {
 
 	private static final int INIT_SIZE = 100;
 
 	private long[] list = new long[INIT_SIZE];
 	private int size;
 
-	public PosList() {
+	public LongDynArray() {
 	}
 
 	long[] getList() {
@@ -25,6 +25,10 @@ public class PosList {
 			list = newList;
 		}
 		list[size++] = value;
+	}
+
+	void clear() {
+		size = 0;
 	}
 
 }

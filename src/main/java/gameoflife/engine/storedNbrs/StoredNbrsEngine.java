@@ -1,12 +1,12 @@
-package gameoflife.engine.storeNbrs;
+package gameoflife.engine.storedNbrs;
 
 import gameoflife.ILifeEngine;
 
-public class StoreNbrsEngine implements ILifeEngine {
+public class StoredNbrsEngine implements ILifeEngine {
 
-	CellMap cells, nextCells;
+	StateNbrsMap cells, nextCells;
 
-	public StoreNbrsEngine(int w, int h) {
+	public StoredNbrsEngine(int w, int h) {
 		if (w < 1 || h < 1) {
 			throw new IllegalArgumentException("sizes not correct");
 		}
@@ -14,8 +14,8 @@ public class StoreNbrsEngine implements ILifeEngine {
 		nextCells = makeCellMap(w, h);
 	}
 
-	private CellMap makeCellMap(int w, int h) {
-		return new CellMap(w, h);
+	private StateNbrsMap makeCellMap(int w, int h) {
+		return new StateNbrsMap(w, h);
 	}
 
 	@Override
@@ -63,7 +63,7 @@ public class StoreNbrsEngine implements ILifeEngine {
 	}
 
 	private void swapCellMaps() {
-		CellMap tmp = cells;
+		StateNbrsMap tmp = cells;
 		cells = nextCells;
 		nextCells = tmp;
 	}
