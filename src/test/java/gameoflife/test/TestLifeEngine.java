@@ -1,12 +1,14 @@
 package gameoflife.test;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.util.Random;
 
 import org.junit.jupiter.api.Test;
 
 import gameoflife.ILifeEngine;
-import gameoflife.engine.countNbrs.CountNbrsLifeEngine;
-import gameoflife.engine.storeNbrs.StoreNbrsLifeEngine;
+import gameoflife.engine.countNbrs.CountNbrsEngine;
+import gameoflife.engine.storeNbrs.StoreNbrsEngine;
 
 class TestLifeEngine {
 
@@ -31,24 +33,24 @@ class TestLifeEngine {
 			initLength--;
 		}
 		// test generations
-//		for (int g = 0; g <= numGen; ++g) {
-//			for (int y = 0; y != h; ++y) {
-//				for (int x = 0; x != w; ++x) {
-//					assertTrue(basic.isCellAlive(x, y) == engine.isCellAlive(x,
-//							y));
-//				}
-//			}
-//			basic.nextGeneration();
-//			engine.nextGeneration();
-//		}
+		for (int g = 0; g <= numGen; ++g) {
+			for (int y = 0; y != h; ++y) {
+				for (int x = 0; x != w; ++x) {
+					assertTrue(basic.isCellAlive(x, y) == engine.isCellAlive(x,
+							y));
+				}
+			}
+			basic.nextGeneration();
+			engine.nextGeneration();
+		}
 	}
 
 	private ILifeEngine makeBaseEngine(int w, int h) {
-		return new CountNbrsLifeEngine(w, h);
+		return new CountNbrsEngine(w, h);
 	}
 
 	private ILifeEngine makeEngine(int w, int h) {
-		return new StoreNbrsLifeEngine(w, h);
+		return new StoreNbrsEngine(w, h);
 	}
 
 }

@@ -2,11 +2,11 @@ package gameoflife.engine.storeNbrs;
 
 import gameoflife.ILifeEngine;
 
-public class StoreNbrsLifeEngine implements ILifeEngine {
+public class StoreNbrsEngine implements ILifeEngine {
 
 	CellMap cells, nextCells;
 
-	public StoreNbrsLifeEngine(int w, int h) {
+	public StoreNbrsEngine(int w, int h) {
 		if (w < 1 || h < 1) {
 			throw new IllegalArgumentException("sizes not correct");
 		}

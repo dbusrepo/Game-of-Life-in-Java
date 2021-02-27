@@ -2,14 +2,14 @@ package gameoflife.engine.countNbrs;
 
 import gameoflife.ILifeEngine;
 
-public class CountNbrsLifeEngine implements ILifeEngine {
+public class CountNbrsEngine implements ILifeEngine {
 
 	static final int DEAD = 0;
 	static final int ALIVE = 1;
 
 	CellMap cells, nextCells;
 
-	public CountNbrsLifeEngine(int w, int h) {
+	public CountNbrsEngine(int w, int h) {
 		if (w < 1 || h < 1) {
 			throw new IllegalArgumentException("sizes not correct");
 		}

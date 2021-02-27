@@ -13,7 +13,7 @@ class CellMap {
 		for (int y = 0; y != h; ++y) {
 			cells[y] = new int[w];
 			for (int x = 0; x != w; ++x) {
-				setCellState(x, y, CountNbrsLifeEngine.DEAD);
+				setCellState(x, y, CountNbrsEngine.DEAD);
 			}
 		}
 	}
