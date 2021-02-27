@@ -25,15 +25,16 @@ public class Life extends GraphAppSoftRendering {
 	}
 
 	private void initSettings() {
-		LifeSettings stgs = new LifeSettings();
-		stgs.title = "Game of Life";
-		stgs.showTitleBar = false;
-		stgs.showMenu = true;
-		stgs.showGraphCapabilities = false;
-		stgs.winWidth = stgs.cols * stgs.magnifer;
-		stgs.winHeight = stgs.rows * stgs.magnifer;
-//		stgs.showFps = false;
-		settings = stgs;
+		LifeSettings sett = new LifeSettings();
+		sett.title = "Game of Life";
+		sett.showTitleBar = false;
+		sett.showMenu = true;
+		sett.showAccelMemory = false;
+		sett.showGraphCapabilities = false;
+		sett.winWidth = sett.cols * sett.magnifer;
+		sett.winHeight = sett.rows * sett.magnifer;
+//		stgs.statsBgCol = Color.GREEN;
+		this.settings = sett;
 	}
 
 	@Override
