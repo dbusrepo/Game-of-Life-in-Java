@@ -3,14 +3,15 @@ package gameoflife;
 import base.graphics.app.GraphAppSoftRendering;
 import base.graphics.app.Settings;
 
-public class Main extends GraphAppSoftRendering {
+public class Life extends GraphAppSoftRendering {
+
 	Settings settings;
 
 	public static void main(String[] args) throws Exception {
-		new Main();
+		new Life();
 	}
 
-	public Main() throws Exception {
+	public Life() throws Exception {
 		settings = new Settings();
 		settings.winWidth = 300;
 		settings.winHeight = 300;

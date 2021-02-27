@@ -33,7 +33,7 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
 }
 
-mainClassName = 'gameoflife.Main'
+mainClassName = 'gameoflife.Life'
 
 jar {
     manifest {
