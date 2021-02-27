@@ -41,7 +41,7 @@ public class StoreNbrsEngine implements ILifeEngine {
 			int[] row = cells.getRow(y);
 			int x = 0;
 			rowDone: while (x != width) {
-				while (row[x] == 0) {
+				while (row[x] == 0) { // fast scan of zero cells
 					if (++x >= width) {
 						break rowDone;
 					}

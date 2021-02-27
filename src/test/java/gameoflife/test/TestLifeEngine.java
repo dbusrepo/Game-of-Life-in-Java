@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import gameoflife.ILifeEngine;
 import gameoflife.engine.countNbrs.CountNbrsEngine;
-import gameoflife.engine.storeNbrs.StoreNbrsEngine;
+import gameoflife.engine.storeNbrs.StoreNbrsChangeListEngine;
 
 class TestLifeEngine {
 
@@ -50,7 +50,8 @@ class TestLifeEngine {
 	}
 
 	private ILifeEngine makeEngine(int w, int h) {
-		return new StoreNbrsEngine(w, h);
+//		return new StoreNbrsEngine(w, h);
+		return new StoreNbrsChangeListEngine(w, h);
 	}
 
 }
