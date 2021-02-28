@@ -4,14 +4,14 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.Random;
 
-import base.graphics.app.GraphAppSoftRendering;
-import gameoflife.engine.countNbrs.CountNbrsEngine;
+import base.graphics.app.GraphApp;
+import gameoflife.engine.storedNbrs.StoredNbrsChangeListEngine;
 
-public class Life extends GraphAppSoftRendering {
+public class Life extends GraphApp {
 
 	LifeSettings settings;
 	LifeEngine lifeEng;
-	CellDisplay cellGraph;
+	CellDisplay cellDisplay;
 
 	public static void main(String[] args) throws Exception {
 		new Life();
@@ -20,15 +20,15 @@ public class Life extends GraphAppSoftRendering {
 	public Life() throws Exception {
 		initSettings();
 		lifeEng = makeLifeEngine();
-		cellGraph = new CellDisplay(settings);
+		cellDisplay = new CellDisplay(settings);
 		randomizeGrid();
 		start(settings);
 	}
 
 	private LifeEngine makeLifeEngine() {
-		return new CountNbrsEngine(settings.width, settings.height);
+//		return new CountNbrsEngine(settings.width, settings.height);
 //		return new StoredNbrsEngine(settings.width, settings.height);
-//		return new StoredNbrsChangeListEngine(settings.width, settings.height);
+		return new StoredNbrsChangeListEngine(settings.width, settings.height);
 	}
 
 	private void initSettings() {
@@ -38,23 +38,24 @@ public class Life extends GraphAppSoftRendering {
 		sett.showMenu = true;
 		sett.showAccelMemory = false;
 		sett.showGraphCapabilities = false;
-		sett.width = 200;
-		sett.height = 150;
+		sett.width = 400;
+		sett.height = 300;
+		sett.magnifier = 2;
 		sett.winHeight = sett.height * sett.magnifier;
 		sett.winWidth = sett.width * sett.magnifier;
-		sett.targetFps = 600;
+		sett.targetFps = 60;
 		this.settings = sett;
 	}
 
 	@Override
 	public void drawFrame(Graphics2D g) {
-		cellGraph.setGraphics(g);
+		cellDisplay.setGraphics(g);
 		if (lifeEng.getGenCounter() == 0) {
 			g.setBackground(Color.BLACK);
 			g.clearRect(0, 0, getCanvas().getWidth(), getCanvas().getHeight());
-			lifeEng.firstGeneration(cellGraph);
+			lifeEng.firstGeneration(cellDisplay);
 		} else {
-			lifeEng.nextGeneration(cellGraph);
+			lifeEng.nextGeneration(cellDisplay);
 		}
 	}
 
@@ -72,7 +73,7 @@ public class Life extends GraphAppSoftRendering {
 	}
 
 	private void randomizeGrid() {
-		Random r = new Random(123);
+		Random r = new Random();
 		int initLength = (lifeEng.getWidth() * lifeEng.getHeight()) / 2;
 		while (initLength > 0) {
 			int x = r.nextInt(lifeEng.getWidth());
@@ -95,4 +96,5 @@ public class Life extends GraphAppSoftRendering {
 //		lifeEngine.setCell(11, 10);
 //		lifeEngine.setCell(12, 10);
 	}
+
 }
