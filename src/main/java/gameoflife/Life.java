@@ -1,13 +1,12 @@
 package gameoflife;
 
 import java.awt.Color;
-import java.awt.Graphics2D;
 import java.util.Random;
 
-import base.graphics.app.GraphApp;
+import base.graphics.app.GraphAppSoftRendering;
 import gameoflife.engine.countNbrs.CountNbrsEngine;
 
-public class Life extends GraphApp {
+public class Life extends GraphAppSoftRendering {
 
 	LifeSettings settings;
 	LifeEngine lifeEng;
@@ -18,10 +17,7 @@ public class Life extends GraphApp {
 	}
 
 	public Life() throws Exception {
-		initSettings();
-		lifeEng = makeLifeEngine();
-		gridDisplay = new GridDisplay(settings);
-		randomizeGrid();
+		settings = initSettings();
 		start(settings);
 	}
 
@@ -31,32 +27,41 @@ public class Life extends GraphApp {
 //		return new StoredNbrsChangeListEngine(settings.width, settings.height);
 	}
 
-	private void initSettings() {
-		LifeSettings sett = new LifeSettings();
-		sett.title = "Game of Life";
-		sett.showTitleBar = false;
-		sett.showMenu = true;
-		sett.showAccelMemory = false;
-		sett.showGraphCapabilities = false;
-		sett.width = 400;
-		sett.height = 300;
-		sett.magnifier = 2;
-		sett.winHeight = sett.height * sett.magnifier;
-		sett.winWidth = sett.width * sett.magnifier;
-		sett.targetFps = 60;
-		this.settings = sett;
+	private LifeSettings initSettings() {
+		LifeSettings settgs = new LifeSettings();
+		settgs.title = "Game of Life";
+		settgs.showTitleBar = false;
+		settgs.showMenu = true;
+		settgs.showAccelMemory = false;
+		settgs.showGraphCapabilities = false;
+		settgs.width = 400;
+		settgs.height = 300;
+		settgs.magnifier = 2;
+		settgs.winHeight = settgs.height * settgs.magnifier;
+		settgs.winWidth = settgs.width * settgs.magnifier;
+		settgs.targetFps = 60;
+		return settgs;
 	}
 
 	@Override
-	public void drawFrame(Graphics2D g) {
-		gridDisplay.setGraphics(g);
-		if (lifeEng.getGenCounter() == 0) {
-			g.setBackground(Color.BLACK);
-			g.clearRect(0, 0, getCanvas().getWidth(), getCanvas().getHeight());
-			lifeEng.firstGeneration(gridDisplay);
-		} else {
-			lifeEng.nextGeneration(gridDisplay);
-		}
+	public void init() {
+		super.init(); // build buffer image...
+		lifeEng = makeLifeEngine();
+		randomizeGrid();
+		gridDisplay = new GridDisplay(settings);
+		gridDisplay.setGraphics(g2Dimg);
+		initGridImage();
+	}
+
+	private void initGridImage() {
+		g2Dimg.setBackground(Color.BLACK);
+		g2Dimg.clearRect(0, 0, getCanvas().getWidth(), getCanvas().getHeight());
+		lifeEng.firstGeneration(gridDisplay);
+	}
+
+	@Override
+	protected void updateImage() {
+		lifeEng.nextGeneration(gridDisplay);
 	}
 
 	@Override
@@ -85,16 +90,16 @@ public class Life extends GraphApp {
 		}
 
 		// test glider
-//		lifeEngine.setCell(10, 10);
-//		lifeEngine.setCell(11, 10);
-//		lifeEngine.setCell(11, 8);
-//		lifeEngine.setCell(12, 10);
-//		lifeEngine.setCell(12, 9);
+//		lifeEng.setCell(10, 10);
+//		lifeEng.setCell(11, 10);
+//		lifeEng.setCell(11, 8);
+//		lifeEng.setCell(12, 10);
+//		lifeEng.setCell(12, 9);
 
 //		test blinker
-//		lifeEngine.setCell(10, 10);
-//		lifeEngine.setCell(11, 10);
-//		lifeEngine.setCell(12, 10);
+//		lifeEng.setCell(10, 10);
+//		lifeEng.setCell(11, 10);
+//		lifeEng.setCell(12, 10);
 	}
 
 }
