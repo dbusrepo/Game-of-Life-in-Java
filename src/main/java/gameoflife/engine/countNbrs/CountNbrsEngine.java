@@ -1,5 +1,6 @@
 package gameoflife.engine.countNbrs;
 
+import gameoflife.CellDisplay;
 import gameoflife.ILifeEngine;
 
 public class CountNbrsEngine implements ILifeEngine {
@@ -38,7 +39,7 @@ public class CountNbrsEngine implements ILifeEngine {
 	}
 
 	@Override
-	public void nextGeneration() {
+	public void nextGeneration(CellDisplay cg) {
 		nextCells.copyCells(cells);
 		for (int y = 0; y != cells.getHeight(); ++y) {
 			for (int x = 0; x != cells.getWidth(); ++x) {
@@ -46,10 +47,12 @@ public class CountNbrsEngine implements ILifeEngine {
 				if (isCellAlive(x, y)) {
 					if (numNbrs != 2 && numNbrs != 3) {
 						nextCells.setCellState(x, y, DEAD);
+						cg.hideCell(x, y);
 					}
 				} else { // the cell is off
 					if (numNbrs == 3) {
 						nextCells.setCellState(x, y, ALIVE);
+						cg.showCell(x, y);
 					}
 				}
 			}
@@ -74,6 +77,16 @@ public class CountNbrsEngine implements ILifeEngine {
 	@Override
 	public int getGeneration() {
 		return generation;
+	}
+
+	@Override
+	public int getWidth() {
+		return cells.getWidth();
+	}
+
+	@Override
+	public int getHeight() {
+		return cells.getHeight();
 	}
 
 }

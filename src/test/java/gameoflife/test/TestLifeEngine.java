@@ -7,6 +7,7 @@ import java.util.Random;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+import gameoflife.CellDisplay;
 import gameoflife.ILifeEngine;
 import gameoflife.engine.countNbrs.CountNbrsEngine;
 import gameoflife.engine.storedNbrs.StoredNbrsChangeListEngine;
@@ -24,6 +25,17 @@ class TestLifeEngine {
 		Random r = new Random(seed);
 		ILifeEngine baseEng = makeBaseEngine(w, h);
 		ILifeEngine curEng = makeEngine(w, h);
+		CellDisplay nullCellGrap = new CellDisplay(0, 0, 0) {
+
+			@Override
+			public void showCell(int x, int y) {
+			}
+
+			@Override
+			public void hideCell(int x, int y) {
+			}
+
+		};
 		// init cell maps
 		while (initLength > 0) {
 			int x = r.nextInt(w);
@@ -34,6 +46,7 @@ class TestLifeEngine {
 			}
 			initLength--;
 		}
+
 		// test generations
 		for (int g = 0; g <= numGen; ++g) {
 			for (int y = 0; y != h; ++y) {
@@ -42,8 +55,8 @@ class TestLifeEngine {
 							.isCellAlive(x, y));
 				}
 			}
-			baseEng.nextGeneration();
-			curEng.nextGeneration();
+			baseEng.nextGeneration(nullCellGrap);
+			curEng.nextGeneration(nullCellGrap);
 		}
 	}
 

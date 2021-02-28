@@ -1,5 +1,6 @@
 package gameoflife.engine.storedNbrs;
 
+import gameoflife.CellDisplay;
 import gameoflife.ILifeEngine;
 
 public class StoredNbrsChangeListEngine implements ILifeEngine {
@@ -38,7 +39,7 @@ public class StoredNbrsChangeListEngine implements ILifeEngine {
 	}
 
 	@Override
-	public void nextGeneration() {
+	public void nextGeneration(CellDisplay cg) {
 		if (generation == 0) {
 			initLists();
 		}
@@ -197,4 +198,13 @@ public class StoredNbrsChangeListEngine implements ILifeEngine {
 		return generation;
 	}
 
+	@Override
+	public int getWidth() {
+		return cells.getWidth();
+	}
+
+	@Override
+	public int getHeight() {
+		return cells.getHeight();
+	}
 }

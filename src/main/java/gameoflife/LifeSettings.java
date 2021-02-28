@@ -4,7 +4,7 @@ import base.graphics.app.Settings;
 
 public class LifeSettings extends Settings {
 
-	int rows = 150;
-	int cols = 200;
-	int magnifer = 2;
+	int width = 150;
+	int height = 200;
+	int magnifier = 4;
 }
