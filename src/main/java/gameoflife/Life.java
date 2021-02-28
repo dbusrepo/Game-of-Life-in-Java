@@ -1,10 +1,13 @@
 package gameoflife;
 
-import java.awt.Color;
 import java.util.Random;
 
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+
 import base.graphics.app.GraphAppSoftRendering;
-import gameoflife.engine.countNbrs.CountNbrsEngine;
+import gameoflife.engine.storedNbrs.StoredNbrsChangeListEngine;
 
 public class Life extends GraphAppSoftRendering {
 
@@ -22,9 +25,9 @@ public class Life extends GraphAppSoftRendering {
 	}
 
 	private LifeEngine makeLifeEngine() {
-		return new CountNbrsEngine(settings.width, settings.height);
+//		return new CountNbrsEngine(settings.width, settings.height);
 //		return new StoredNbrsEngine(settings.width, settings.height);
-//		return new StoredNbrsChangeListEngine(settings.width, settings.height);
+		return new StoredNbrsChangeListEngine(settings.width, settings.height);
 	}
 
 	private LifeSettings initSettings() {
@@ -54,7 +57,7 @@ public class Life extends GraphAppSoftRendering {
 	}
 
 	private void initGridImage() {
-		g2Dimg.setBackground(Color.BLACK);
+		g2Dimg.setBackground(settings.deadColor);
 		g2Dimg.clearRect(0, 0, getCanvas().getWidth(), getCanvas().getHeight());
 		lifeEng.firstGeneration(gridDisplay);
 	}
@@ -100,6 +103,24 @@ public class Life extends GraphAppSoftRendering {
 //		lifeEng.setCell(10, 10);
 //		lifeEng.setCell(11, 10);
 //		lifeEng.setCell(12, 10);
+	}
+
+	@Override
+	protected String buildStatsStr() {
+		return "FPS: " + df.format(averageFPS);
+	}
+
+	@Override
+	public JMenuBar buildMenu() {
+		JMenuBar menuBar = new JMenuBar();
+		JMenu fileMenu = new JMenu("Life");
+//		fileMenu.setMnemonic(KeyEvent.VK_F);
+		JMenuItem exitMenuItem = new JMenuItem("Exit");
+		exitMenuItem.addActionListener(exitDialogActList);
+//		exitMenuItem.setToolTipText("Exit Application");
+		fileMenu.add(exitMenuItem);
+		menuBar.add(fileMenu);
+		return menuBar;
 	}
 
 }

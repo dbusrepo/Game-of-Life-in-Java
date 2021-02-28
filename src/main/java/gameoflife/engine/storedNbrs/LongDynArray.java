@@ -2,7 +2,7 @@ package gameoflife.engine.storedNbrs;
 
 public class LongDynArray {
 
-	private static final int INIT_SIZE = 100;
+	private static final int INIT_SIZE = 1000;
 
 	private long[] list = new long[INIT_SIZE];
 	private int size;
