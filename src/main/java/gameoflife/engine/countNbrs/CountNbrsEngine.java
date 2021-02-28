@@ -1,6 +1,6 @@
 package gameoflife.engine.countNbrs;
 
-import gameoflife.CellDisplay;
+import gameoflife.GridDisplay;
 import gameoflife.LifeEngine;
 
 public class CountNbrsEngine extends LifeEngine {
@@ -38,7 +38,7 @@ public class CountNbrsEngine extends LifeEngine {
 	}
 
 	@Override
-	public void updateGeneration(CellDisplay cd) {
+	public void updateGeneration(GridDisplay gd) {
 		nextCells.copyCells(cells);
 		for (int y = 0; y != cells.getHeight(); ++y) {
 			for (int x = 0; x != cells.getWidth(); ++x) {
@@ -46,12 +46,12 @@ public class CountNbrsEngine extends LifeEngine {
 				if (isCellAlive(x, y)) {
 					if (numNbrs != 2 && numNbrs != 3) {
 						nextCells.setCellState(x, y, DEAD);
-						cd.hideCell(x, y);
+						gd.hideCell(x, y);
 					}
 				} else { // the cell is off
 					if (numNbrs == 3) {
 						nextCells.setCellState(x, y, ALIVE);
-						cd.showCell(x, y);
+						gd.showCell(x, y);
 					}
 				}
 			}

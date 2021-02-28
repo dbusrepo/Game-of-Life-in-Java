@@ -5,13 +5,13 @@ import java.awt.Graphics2D;
 import java.util.Random;
 
 import base.graphics.app.GraphApp;
-import gameoflife.engine.storedNbrs.StoredNbrsChangeListEngine;
+import gameoflife.engine.countNbrs.CountNbrsEngine;
 
 public class Life extends GraphApp {
 
 	LifeSettings settings;
 	LifeEngine lifeEng;
-	CellDisplay cellDisplay;
+	GridDisplay gridDisplay;
 
 	public static void main(String[] args) throws Exception {
 		new Life();
@@ -20,15 +20,15 @@ public class Life extends GraphApp {
 	public Life() throws Exception {
 		initSettings();
 		lifeEng = makeLifeEngine();
-		cellDisplay = new CellDisplay(settings);
+		gridDisplay = new GridDisplay(settings);
 		randomizeGrid();
 		start(settings);
 	}
 
 	private LifeEngine makeLifeEngine() {
-//		return new CountNbrsEngine(settings.width, settings.height);
+		return new CountNbrsEngine(settings.width, settings.height);
 //		return new StoredNbrsEngine(settings.width, settings.height);
-		return new StoredNbrsChangeListEngine(settings.width, settings.height);
+//		return new StoredNbrsChangeListEngine(settings.width, settings.height);
 	}
 
 	private void initSettings() {
@@ -49,13 +49,13 @@ public class Life extends GraphApp {
 
 	@Override
 	public void drawFrame(Graphics2D g) {
-		cellDisplay.setGraphics(g);
+		gridDisplay.setGraphics(g);
 		if (lifeEng.getGenCounter() == 0) {
 			g.setBackground(Color.BLACK);
 			g.clearRect(0, 0, getCanvas().getWidth(), getCanvas().getHeight());
-			lifeEng.firstGeneration(cellDisplay);
+			lifeEng.firstGeneration(gridDisplay);
 		} else {
-			lifeEng.nextGeneration(cellDisplay);
+			lifeEng.nextGeneration(gridDisplay);
 		}
 	}
 

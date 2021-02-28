@@ -2,12 +2,12 @@ package gameoflife;
 
 import java.awt.Graphics2D;
 
-public class CellDisplay {
+public class GridDisplay {
 
 	LifeSettings setts;
 	Graphics2D g;
 
-	public CellDisplay(LifeSettings setts) {
+	public GridDisplay(LifeSettings setts) {
 		this.setts = setts;
 	}
 

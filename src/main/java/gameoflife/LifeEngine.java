@@ -14,22 +14,22 @@ public abstract class LifeEngine {
 
 	public abstract void clearCell(int x, int y); // set a cell dead
 
-	public void nextGeneration(CellDisplay cd) {
-		updateGeneration(cd);
+	public void nextGeneration(GridDisplay gd) {
+		updateGeneration(gd);
 		incGenCnt();
 	}
 
-	protected abstract void updateGeneration(CellDisplay cd);
+	protected abstract void updateGeneration(GridDisplay gd);
 
 	public int getGenCounter() {
 		return genCnt;
 	}
 
-	public void firstGeneration(CellDisplay cd) {
+	public void firstGeneration(GridDisplay gd) {
 		for (int y = 0; y != getHeight(); ++y) {
 			for (int x = 0; x != getWidth(); ++x) {
 				if (isCellAlive(x, y)) {
-					cd.showCell(x, y);
+					gd.showCell(x, y);
 				}
 			}
 		}

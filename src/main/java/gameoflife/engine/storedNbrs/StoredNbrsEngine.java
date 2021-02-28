@@ -1,6 +1,6 @@
 package gameoflife.engine.storedNbrs;
 
-import gameoflife.CellDisplay;
+import gameoflife.GridDisplay;
 import gameoflife.LifeEngine;
 
 public class StoredNbrsEngine extends LifeEngine {
@@ -35,7 +35,7 @@ public class StoredNbrsEngine extends LifeEngine {
 	}
 
 	@Override
-	public void updateGeneration(CellDisplay cd) {
+	public void updateGeneration(GridDisplay gd) {
 		nextCells.copyCells(cells);
 		int width = cells.getWidth();
 		for (int y = 0; y != cells.getHeight(); ++y) {
@@ -51,12 +51,12 @@ public class StoredNbrsEngine extends LifeEngine {
 				if (isCellAlive(x, y)) {
 					if (cnt != 2 && cnt != 3) {
 						nextCells.clearCell(x, y);
-						cd.hideCell(x, y);
+						gd.hideCell(x, y);
 					}
 				} else {
 					if (cnt == 3) {
 						nextCells.setCell(x, y);
-						cd.showCell(x, y);
+						gd.showCell(x, y);
 					}
 				}
 				++x;

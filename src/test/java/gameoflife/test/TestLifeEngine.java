@@ -7,7 +7,7 @@ import java.util.Random;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-import gameoflife.CellDisplay;
+import gameoflife.GridDisplay;
 import gameoflife.LifeEngine;
 import gameoflife.engine.countNbrs.CountNbrsEngine;
 import gameoflife.engine.storedNbrs.StoredNbrsChangeListEngine;
@@ -25,7 +25,7 @@ class TestLifeEngine {
 		Random r = new Random(seed);
 		LifeEngine baseEng = makeBaseEngine(w, h);
 		LifeEngine curEng = makeEngine(w, h);
-		CellDisplay nullCellGrap = new CellDisplay(null) {
+		GridDisplay nullCellGrap = new GridDisplay(null) {
 
 			@Override
 			public void showCell(int x, int y) {

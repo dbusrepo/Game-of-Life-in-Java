@@ -1,6 +1,6 @@
 package gameoflife.engine.storedNbrs;
 
-import gameoflife.CellDisplay;
+import gameoflife.GridDisplay;
 import gameoflife.LifeEngine;
 
 public class StoredNbrsChangeListEngine extends LifeEngine {
@@ -38,19 +38,19 @@ public class StoredNbrsChangeListEngine extends LifeEngine {
 	}
 
 	@Override
-	public void firstGeneration(CellDisplay cd) {
-		super.firstGeneration(cd);
+	public void firstGeneration(GridDisplay gd) {
+		super.firstGeneration(gd);
 		initLists();
 	}
 
 	@Override
-	public void updateGeneration(CellDisplay cd) {
+	public void updateGeneration(GridDisplay gd) {
 		// inv: here live and die (change) lists contain the cells to update for
 		// this new generation. Those cells have the nextGen flag on. Note: in
 		// this implementation, live and die lists do not contain
 		// duplicates or false positives.
 		// nextLive, nextDie are empty here
-		updateCells(cd); // visit the change lists and update the cells
+		updateCells(gd); // visit the change lists and update the cells
 		updateLists(); // visits the change lists again and build the next
 						// change lists
 	}
@@ -79,12 +79,12 @@ public class StoredNbrsChangeListEngine extends LifeEngine {
 		swapLists();
 	}
 
-	private void updateCells(CellDisplay cd) {
+	private void updateCells(GridDisplay cd) {
 		updateLive(cd);
 		updateDie(cd);
 	}
 
-	private void updateLive(CellDisplay cd) {
+	private void updateLive(GridDisplay gd) {
 		long[] liveCells = live.getList();
 		int size = live.getSize();
 		for (int i = 0; i != size; ++i) {
@@ -92,11 +92,11 @@ public class StoredNbrsChangeListEngine extends LifeEngine {
 			int x = (int) (val >>> SHIFT);
 			int y = (int) val;
 			cells.setCell(x, y);
-			cd.showCell(x, y);
+			gd.showCell(x, y);
 		}
 	}
 
-	private void updateDie(CellDisplay cd) {
+	private void updateDie(GridDisplay gd) {
 		long[] dieCells = die.getList();
 		int size = die.getSize();
 		for (int i = 0; i != size; ++i) {
@@ -104,7 +104,7 @@ public class StoredNbrsChangeListEngine extends LifeEngine {
 			int x = (int) (val >>> SHIFT);
 			int y = (int) val;
 			cells.clearCell(x, y);
-			cd.hideCell(x, y);
+			gd.hideCell(x, y);
 		}
 	}
 
