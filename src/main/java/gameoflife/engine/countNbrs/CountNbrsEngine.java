@@ -1,15 +1,14 @@
 package gameoflife.engine.countNbrs;
 
 import gameoflife.CellDisplay;
-import gameoflife.ILifeEngine;
+import gameoflife.LifeEngine;
 
-public class CountNbrsEngine implements ILifeEngine {
+public class CountNbrsEngine extends LifeEngine {
 
 	static final int DEAD = 0;
 	static final int ALIVE = 1;
 
 	StateMap cells, nextCells;
-	private int generation;
 
 	public CountNbrsEngine(int w, int h) {
 		if (w < 1 || h < 1) {
@@ -39,7 +38,7 @@ public class CountNbrsEngine implements ILifeEngine {
 	}
 
 	@Override
-	public void nextGeneration(CellDisplay cg) {
+	public void updateGeneration(CellDisplay cd) {
 		nextCells.copyCells(cells);
 		for (int y = 0; y != cells.getHeight(); ++y) {
 			for (int x = 0; x != cells.getWidth(); ++x) {
@@ -47,18 +46,17 @@ public class CountNbrsEngine implements ILifeEngine {
 				if (isCellAlive(x, y)) {
 					if (numNbrs != 2 && numNbrs != 3) {
 						nextCells.setCellState(x, y, DEAD);
-						cg.hideCell(x, y);
+						cd.hideCell(x, y);
 					}
 				} else { // the cell is off
 					if (numNbrs == 3) {
 						nextCells.setCellState(x, y, ALIVE);
-						cg.showCell(x, y);
+						cd.showCell(x, y);
 					}
 				}
 			}
 		}
 		swapCellMaps();
-		++generation;
 	}
 
 	private void swapCellMaps() {
@@ -72,11 +70,6 @@ public class CountNbrsEngine implements ILifeEngine {
 				+ cells.cellState(x + 1, y - 1) + cells.cellState(x - 1, y)
 				+ cells.cellState(x + 1, y) + cells.cellState(x - 1, y + 1)
 				+ cells.cellState(x, y + 1) + cells.cellState(x + 1, y + 1);
-	}
-
-	@Override
-	public int getGeneration() {
-		return generation;
 	}
 
 	@Override

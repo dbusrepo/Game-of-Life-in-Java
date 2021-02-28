@@ -1,12 +1,11 @@
 package gameoflife.engine.storedNbrs;
 
 import gameoflife.CellDisplay;
-import gameoflife.ILifeEngine;
+import gameoflife.LifeEngine;
 
-public class StoredNbrsEngine implements ILifeEngine {
+public class StoredNbrsEngine extends LifeEngine {
 
 	StateNbrsMap cells, nextCells;
-	private int generation;
 
 	public StoredNbrsEngine(int w, int h) {
 		if (w < 1 || h < 1) {
@@ -36,7 +35,7 @@ public class StoredNbrsEngine implements ILifeEngine {
 	}
 
 	@Override
-	public void nextGeneration(CellDisplay cg) {
+	public void updateGeneration(CellDisplay cd) {
 		nextCells.copyCells(cells);
 		int width = cells.getWidth();
 		for (int y = 0; y != cells.getHeight(); ++y) {
@@ -52,28 +51,24 @@ public class StoredNbrsEngine implements ILifeEngine {
 				if (isCellAlive(x, y)) {
 					if (cnt != 2 && cnt != 3) {
 						nextCells.clearCell(x, y);
+						cd.hideCell(x, y);
 					}
 				} else {
 					if (cnt == 3) {
 						nextCells.setCell(x, y);
+						cd.showCell(x, y);
 					}
 				}
 				++x;
 			}
 		}
 		swapCellMaps();
-		++generation;
 	}
 
 	private void swapCellMaps() {
 		StateNbrsMap tmp = cells;
 		cells = nextCells;
 		nextCells = tmp;
-	}
-
-	@Override
-	public int getGeneration() {
-		return generation;
 	}
 
 	@Override

@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import gameoflife.CellDisplay;
-import gameoflife.ILifeEngine;
+import gameoflife.LifeEngine;
 import gameoflife.engine.countNbrs.CountNbrsEngine;
 import gameoflife.engine.storedNbrs.StoredNbrsChangeListEngine;
 
@@ -23,9 +23,9 @@ class TestLifeEngine {
 		int numGen = 100;
 		int initLength = (w * h) / 2;
 		Random r = new Random(seed);
-		ILifeEngine baseEng = makeBaseEngine(w, h);
-		ILifeEngine curEng = makeEngine(w, h);
-		CellDisplay nullCellGrap = new CellDisplay(0, 0, 0) {
+		LifeEngine baseEng = makeBaseEngine(w, h);
+		LifeEngine curEng = makeEngine(w, h);
+		CellDisplay nullCellGrap = new CellDisplay(null) {
 
 			@Override
 			public void showCell(int x, int y) {
@@ -60,12 +60,12 @@ class TestLifeEngine {
 		}
 	}
 
-	private ILifeEngine makeBaseEngine(int w, int h) {
+	private LifeEngine makeBaseEngine(int w, int h) {
 		return new CountNbrsEngine(w, h);
 //		return new StoredNbrsEngine(w, h);
 	}
 
-	private ILifeEngine makeEngine(int w, int h) {
+	private LifeEngine makeEngine(int w, int h) {
 //		return new StoredNbrsEngine(w, h);
 		return new StoredNbrsChangeListEngine(w, h);
 //		return new CountNbrsEngine(w, h);

@@ -1,16 +1,15 @@
 package gameoflife.engine.storedNbrs;
 
 import gameoflife.CellDisplay;
-import gameoflife.ILifeEngine;
+import gameoflife.LifeEngine;
 
-public class StoredNbrsChangeListEngine implements ILifeEngine {
+public class StoredNbrsChangeListEngine extends LifeEngine {
 
 	private static final int SHIFT = 32;
 
 	StateNbrsNextGenMap cells;
 	LongDynArray live, die;
 	LongDynArray nextLive, nextDie;
-	int generation;
 
 	public StoredNbrsChangeListEngine(int w, int h) {
 		if (w < 1 || h < 1) {
@@ -39,19 +38,21 @@ public class StoredNbrsChangeListEngine implements ILifeEngine {
 	}
 
 	@Override
-	public void nextGeneration(CellDisplay cg) {
-		if (generation == 0) {
-			initLists();
-		}
+	public void firstGeneration(CellDisplay cd) {
+		super.firstGeneration(cd);
+		initLists();
+	}
+
+	@Override
+	public void updateGeneration(CellDisplay cd) {
 		// inv: here live and die (change) lists contain the cells to update for
 		// this new generation. Those cells have the nextGen flag on. Note: in
 		// this implementation, live and die lists do not contain
 		// duplicates or false positives.
 		// nextLive, nextDie are empty here
-		updateCells(); // visit the change lists and update the cells
+		updateCells(cd); // visit the change lists and update the cells
 		updateLists(); // visits the change lists again and build the next
 						// change lists
-		++generation;
 	}
 
 	private void initLists() {
@@ -78,12 +79,12 @@ public class StoredNbrsChangeListEngine implements ILifeEngine {
 		swapLists();
 	}
 
-	private void updateCells() {
-		updateLive();
-		updateDie();
+	private void updateCells(CellDisplay cd) {
+		updateLive(cd);
+		updateDie(cd);
 	}
 
-	private void updateLive() {
+	private void updateLive(CellDisplay cd) {
 		long[] liveCells = live.getList();
 		int size = live.getSize();
 		for (int i = 0; i != size; ++i) {
@@ -91,10 +92,11 @@ public class StoredNbrsChangeListEngine implements ILifeEngine {
 			int x = (int) (val >>> SHIFT);
 			int y = (int) val;
 			cells.setCell(x, y);
+			cd.showCell(x, y);
 		}
 	}
 
-	private void updateDie() {
+	private void updateDie(CellDisplay cd) {
 		long[] dieCells = die.getList();
 		int size = die.getSize();
 		for (int i = 0; i != size; ++i) {
@@ -102,6 +104,7 @@ public class StoredNbrsChangeListEngine implements ILifeEngine {
 			int x = (int) (val >>> SHIFT);
 			int y = (int) val;
 			cells.clearCell(x, y);
+			cd.hideCell(x, y);
 		}
 	}
 
@@ -191,11 +194,6 @@ public class StoredNbrsChangeListEngine implements ILifeEngine {
 	private long makePos(int x, int y) {
 		long value = ((long) x << SHIFT) | y;
 		return value;
-	}
-
-	@Override
-	public int getGeneration() {
-		return generation;
 	}
 
 	@Override

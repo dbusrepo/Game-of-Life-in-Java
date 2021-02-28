@@ -1,18 +1,14 @@
 package gameoflife;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 
 public class CellDisplay {
 
-	int width, height;
-	int magnifier;
+	LifeSettings setts;
 	Graphics2D g;
 
-	public CellDisplay(int width, int height, int magnifier) {
-		this.width = width;
-		this.height = height;
-		this.magnifier = magnifier;
+	public CellDisplay(LifeSettings setts) {
+		this.setts = setts;
 	}
 
 	void setGraphics(Graphics2D g) {
@@ -20,12 +16,18 @@ public class CellDisplay {
 	}
 
 	public void showCell(int x, int y) {
-		g.setColor(Color.GREEN);
-		g.fillRect(x * magnifier, y * magnifier, magnifier, magnifier);
+		g.setColor(setts.aliveColor);
+		drawCell(x, y);
 	}
 
 	public void hideCell(int x, int y) {
-		g.setColor(Color.BLACK);
-		g.fillRect(x * magnifier, y * magnifier, magnifier, magnifier);
+		g.setColor(setts.deadColor);
+		drawCell(x, y);
 	}
+
+	private void drawCell(int x, int y) {
+		g.fillRect(x * setts.magnifier, y * setts.magnifier, setts.magnifier,
+				setts.magnifier);
+	}
+
 }
